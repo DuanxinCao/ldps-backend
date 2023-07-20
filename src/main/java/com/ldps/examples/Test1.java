@@ -14,14 +14,17 @@ public class Test1 {
         CHNativeExpressionEvaluator chNativeExpressionEvaluator = new CHNativeExpressionEvaluator();
         List<GeneralInIterator> iterList = new ArrayList<>();
         GeneralOutIterator kernelWithBatchIterator = chNativeExpressionEvaluator.createKernelWithBatchIterator(sql, iterList, null);
-        ColumnarBatch columnarBatch = kernelWithBatchIterator.nextInternal();
-        Iterator<InternalRow> internalRowIterator = columnarBatch.rowIterator();
-        while(internalRowIterator.hasNext()){
-            System.out.println("--------");
-            InternalRow next = internalRowIterator.next();
-            System.out.println(next.getLong(0));
-            System.out.println(next.getString(1));
+        while (kernelWithBatchIterator.hasNext()) {
+            System.out.println("++++++");
+            ColumnarBatch columnarBatch = kernelWithBatchIterator.next();
+            Iterator<InternalRow> internalRowIterator = columnarBatch.rowIterator();
+            while (internalRowIterator.hasNext()) {
+                InternalRow next = internalRowIterator.next();
+                System.out.println(next.getLong(0));
+                System.out.println(next.getString(1));
+            }
         }
+
     }
 
     public static void test2() throws Exception {
@@ -33,12 +36,13 @@ public class Test1 {
 
 
     public static void main(String[] args) throws Exception {
+//        lsof -nP -p 21528 | grep LISTEN
+        System.loadLibrary("ldpsbackend");
+        System.loadLibrary("ldpsbackend");
         System.loadLibrary("ldpsbackend");
 
-
-
-        Query query = new Query();
-        query.sqlQuery("SELECT id, name FROM default.numbers");
+//        Query query = new Query();
+//        query.sqlQuery("SELECT id, name FROM default.numbers");
         Test1.test1();
 //        test2();
     }
