@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.example</groupId>
+    <groupId>org.lindorm</groupId>
     <artifactId>LdpsBackendJava</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Archetype - LdpsBackendJava</name>
@@ -14,6 +14,7 @@
         <spark32.scala>2.12.15</spark32.scala>
         <spark32bundle.version>3.2</spark32bundle.version>
         <spark33.version>3.3.1</spark33.version>
+        <spark33ldps.version>3.3.1-ldspark-1.0-SNAPSHOT</spark33ldps.version>
         <spark33.scala>2.12.15</spark33.scala>
         <spark33bundle.version>3.3</spark33bundle.version>
         <delta20.version>2.0.1</delta20.version>
@@ -84,9 +85,6 @@
     <profiles>
         <profile>
             <id>spark-3.2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <scala.version>${spark32.scala}</scala.version>
                 <spark.major.version>3</spark.major.version>
@@ -109,14 +107,59 @@
                 <sparkshim.artifactId>${spark33.shim.version}</sparkshim.artifactId>
             </properties>
         </profile>
+        <profile>
+            <id>3.3.1-ldspark-1.0-SNAPSHOT</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <scala.version>${spark33.scala}</scala.version>
+                <spark.major.version>3</spark.major.version>
+                <spark.version>${spark33ldps.version}</spark.version>
+                <delta.version>${delta22.version}</delta.version>
+                <delta.binary.version>22</delta.binary.version>
+                <sparkbundle.version>${spark33bundle.version}</sparkbundle.version>
+                <sparkshim.artifactId>${spark33.shim.version}</sparkshim.artifactId>
+            </properties>
+        </profile>
     </profiles>
 
-    <!--  <dependencyManagement>-->
     <dependencies>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.lindorm</groupId>
+                    <artifactId>LdpsBackendJava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive-thriftserver_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.lindorm</groupId>
+                    <artifactId>LdpsBackendJava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-catalyst_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.arrow</groupId>
@@ -127,14 +170,12 @@
                     <artifactId>antlr4-runtime</artifactId>
                 </exclusion>
             </exclusions>
-<!--            <scope>test</scope>-->
         </dependency>
-
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
-<!--            <scope>test</scope>-->
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.hadoop</groupId>
@@ -154,19 +195,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-reflect</artifactId>
             <version>${scala.version}</version>
         </dependency>
     </dependencies>
-    <!--  </dependencyManagement>-->
 
     <build>
         <plugins>
@@ -214,6 +254,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -1,9 +1,8 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend;
 
 import org.apache.spark.sql.catalyst.InternalRow;
 import org.apache.spark.sql.vectorized.ColumnarBatch;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

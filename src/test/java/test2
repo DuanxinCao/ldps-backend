@@ -1,0 +1,12 @@
+spark.plugins=io.glutenproject.GlutenPlugin
+spark.gluten.sql.columnar.columnarToRow=true
+spark.executorEnv.LD_PRELOAD=/opt/spark/lib/libch.so
+spark.gluten.sql.columnar.libpath=/opt/spark/lib/libch.so
+spark.gluten.sql.columnar.iterator=true
+spark.gluten.sql.columnar.loadarrow=false
+spark.gluten.sql.columnar.hashagg.enablefinal=true
+spark.gluten.sql.enable.native.validation=false
+spark.gluten.sql.columnar.backend.ch.use.v2=false
+spark.gluten.sql.columnar.forceShuffledHashJoin=true
+
+./bin/spark-submit   --conf spark.ldps.native.enabled=true --conf spark.ldps.native.default='{"spark.plugins":"io.glutenproject.GlutenPlugin","spark.executorEnv.LD_PRELOAD":"/opt/spark/lib/libch.so","spark.sql.columnVector.offheap.enabled":"true","spark.gluten.sql.columnar.columnarToRow":"true","spark.gluten.sql.columnar.libpath":"/opt/spark/lib/libch.so","spark.gluten.sql.columnar.iterator":"true","spark.gluten.sql.columnar.loadarrow":"false","spark.gluten.sql.columnar.hashagg.enablefinal":"true","spark.gluten.sql.enable.native.validation":"false","spark.gluten.sql.columnar.backend.ch.use.v2":"false","spark.gluten.sql.columnar.forceShuffledHashJoin":"true","spark.gluten.sql.columnar.backend.ch.runtime_config.hdfs.libhdfs3_conf":"/opt/spark/work-dir/ldps-hdfs-site.xml","spark.sql.catalog.spark_catalog":"org.apache.spark.sql.execution.datasources.v2.clickhouse.ClickHouseSparkCatalog"}'  --class com.aliyun.lindorm.ldspark.examples.LindormSparkWordCount lindorm-spark-examples-1.0-SNAPSHOT.jar

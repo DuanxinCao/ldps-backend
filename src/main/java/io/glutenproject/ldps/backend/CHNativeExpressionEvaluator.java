@@ -1,15 +1,10 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.catalyst.expressions.Attribute;
-import scala.Tuple2;
-import scala.collection.JavaConverters;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CHNativeExpressionEvaluator {
     private final ExpressionEvaluatorJniWrapper jniWrapper;

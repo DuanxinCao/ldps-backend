@@ -1,5 +1,6 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend;
 
+import io.glutenproject.ldps.utils.CHExecUtil;
 import org.apache.spark.sql.types.DataType;
 import org.apache.spark.sql.types.Decimal;
 import org.apache.spark.sql.vectorized.ColumnVector;
@@ -7,9 +8,15 @@ import org.apache.spark.sql.vectorized.ColumnarArray;
 import org.apache.spark.sql.vectorized.ColumnarMap;
 import org.apache.spark.unsafe.types.UTF8String;
 
-public class CHColumnVector extends ColumnVector {
-    private final int columnPosition;
+import java.io.Serializable;
+
+public class CHColumnVector extends ColumnVector implements Serializable{
+
+    private int columnPosition;
     private long blockAddress;
+    public CHColumnVector(){
+        super(CHExecUtil.inferSparkDataType(null));
+    }
 
     public CHColumnVector(DataType type, long blockAddress, int columnPosition) {
         super(type);

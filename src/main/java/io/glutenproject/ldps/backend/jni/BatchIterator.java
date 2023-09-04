@@ -1,4 +1,4 @@
-package com.ldps.examples.jni;
+package io.glutenproject.ldps.backend.jni;
 
 
 public class BatchIterator {

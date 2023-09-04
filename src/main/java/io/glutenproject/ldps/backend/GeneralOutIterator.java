@@ -1,4 +1,4 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend;
 
 import org.apache.spark.sql.catalyst.expressions.Attribute;
 import org.apache.spark.sql.vectorized.ColumnarBatch;

@@ -1,6 +1,6 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend;
 
-import com.ldps.scalautils.CHExecUtil;
+import io.glutenproject.ldps.utils.CHExecUtil;
 import org.apache.spark.sql.vectorized.ColumnVector;
 import org.apache.spark.sql.vectorized.ColumnarBatch;
 

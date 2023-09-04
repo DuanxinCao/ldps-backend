@@ -1,0 +1,100 @@
++ '[' -z '' ']'
+++ java -XshowSettings:properties -version
+++ grep java.home
+++ awk '{print $3}'
++ JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
++ SPARK_CLASSPATH=':/opt/spark/jars/*'
++ env
++ grep SPARK_JAVA_OPT_
++ sort -t_ -k4 -n
++ sed 's/[^=]*=\(.*\)/\1/g'
++ readarray -t SPARK_EXECUTOR_JAVA_OPTS
++ '[' -n '' ']'
++ '[' -z ']'
++ '[' -z ']'
++ '[' -n '' ']'
++ '[' -z ']'
++ '[' -z x ']'
++ SPARK_CLASSPATH='/opt/spark/conf::/opt/spark/jars/*'
++ case "$1" in
++ shift 1
++ CMD=(${JAVA_HOME}/bin/java "${SPARK_EXECUTOR_JAVA_OPTS[@]}" -Xms$SPARK_EXECUTOR_MEMORY -Xmx$SPARK_EXECUTOR_MEMORY -cp "$SPARK_CLASSPATH:$SPARK_DIST_CLASSPATH" org.apache.spark.scheduler.cluster.k8s.KubernetesExecutorBackend --driver-url $SPARK_DRIVER_URL --executor-id $SPARK_EXECUTOR_ID --cores $SPARK_EXECUTOR_CORES --app-id $SPARK_APPLICATION_ID --hostname $SPARK_EXECUTOR_POD_IP --resourceProfileId $SPARK_RESOURCE_PROFILE_ID --podName $SPARK_EXECUTOR_POD_NAME)
++ SPARK_LOCAL_LOG_DIR=/var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1
++ echo 'Log directory for executor 1 is: /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1'
++ mkdir -p /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1
+Log directory for executor 1 is: /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1
++ '[' -n /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1 ']'
++ EXIT_CODE_FILE=/tmp/spark_exit_code.res
++ touch /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1/stdout /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1/stderr
++ echo '((/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java -XX:+IgnoreUnrecognizedVMOptions --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.nio.cs=ALL-UNNAMED --add-opens=java.base/sun.security.action=ALL-UNNAMED --add-opens=java.base/sun.util.calendar=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED -XX:-UseGCOverheadLimit -Dspark.network.timeout=600s -Dspark.ui.port=4040 -Dspark.driver.port=7078 -Dspark.driver.blockManager.port=7079 -Xms174080m -Xmx174080m -cp /opt/spark/conf::/opt/spark/jars/*: org.apache.spark.scheduler.cluster.k8s.KubernetesExecutorBackend --driver-url spark://CoarseGrainedScheduler@jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc:7078 --executor-id 1 --cores 64 --app-id af4ada401ce6461e834c443648a17ab6 --hostname 10.7.146.206 --resourceProfileId 0 --podName jdbc-connection-root-af8c4a8a2aa71bae-exec-1 ; echo -n > /tmp/spark_exit_code.res $?) | tee -a /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1/stdout)   3>&1 1>&2 2>&3 | tee -a /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1/stderr ; exit `cat /tmp/spark_exit_code.res`'
++ exec /usr/bin/tini -s -- /bin/bash /tmp/spark_start_cmd.sh
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/spark/jars/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/spark/jars/log4j-slf4j-impl-2.17.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+2023-08-25 11:05:44,070 INFO KubernetesExecutorBackend: Started daemon with process name: 94@jdbc-connection-root-af8c4a8a2aa71bae-exec-1
+2023-08-25 11:05:44,076 INFO SignalUtils: Registering signal handler for TERM
+2023-08-25 11:05:44,077 INFO SignalUtils: Registering signal handler for HUP
+2023-08-25 11:05:44,077 INFO SignalUtils: Registering signal handler for INT
+2023-08-25 11:05:44,525 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2023-08-25 11:05:44,626 INFO SecurityManager: Changing view acls to: root
+2023-08-25 11:05:44,627 INFO SecurityManager: Changing modify acls to: root
+2023-08-25 11:05:44,627 INFO SecurityManager: Changing view acls groups to:
+2023-08-25 11:05:44,627 INFO SecurityManager: Changing modify acls groups to:
+2023-08-25 11:05:44,628 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+2023-08-25 11:05:45,058 INFO TransportClientFactory: Successfully created connection to jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc/10.7.146.205:7078 after 70 ms (0 ms spent in bootstraps)
+2023-08-25 11:05:45,232 INFO SecurityManager: Changing view acls to: root
+2023-08-25 11:05:45,232 INFO SecurityManager: Changing modify acls to: root
+2023-08-25 11:05:45,232 INFO SecurityManager: Changing view acls groups to:
+2023-08-25 11:05:45,232 INFO SecurityManager: Changing modify acls groups to:
+2023-08-25 11:05:45,232 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+2023-08-25 11:05:45,280 INFO TransportClientFactory: Successfully created connection to jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc/10.7.146.205:7078 after 1 ms (0 ms spent in bootstraps)
+2023-08-25 11:05:45,370 INFO DiskBlockManager: Created local directory at /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/blockmgr-7ecaa2db-7810-4d50-b4b9-73c408cb420c
+2023-08-25 11:05:45,403 INFO MemoryStore: MemoryStore started with capacity 137.6 GiB
+2023-08-25 11:05:45,599 INFO KubernetesCoarseGrainedExecutorBackend: Connecting to driver: spark://CoarseGrainedScheduler@jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc:7078
+2023-08-25 11:05:45,607 INFO ResourceUtils: ==============================================================
+2023-08-25 11:05:45,607 INFO ResourceUtils: No custom resources configured for spark.executor.
+2023-08-25 11:05:45,607 INFO ResourceUtils: ==============================================================
+2023-08-25 11:05:46,385 INFO DFSLogSyncer$DfsAsyncWriter: Sync stdout and stderr in /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1 to hdfs://ld-bp132m0984k66b0e1/ldspark/ldspark-logs/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1
+2023-08-25 11:05:46,587 INFO DFSLogSyncer$DfsAsyncWriter: Started k8s log file sync to directory: hdfs://ld-bp132m0984k66b0e1/ldspark/ldspark-logs/af4ada401ce6461e834c443648a17ab6/__executor_logs__/1
+2023-08-25 11:05:46,590 INFO KubernetesCoarseGrainedExecutorBackend: Successfully registered with driver
+2023-08-25 11:05:46,594 INFO Executor: Starting executor ID 1 on host 10.7.146.206
+2023-08-25 11:05:46,718 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 36013.
+2023-08-25 11:05:46,718 INFO NettyBlockTransferService: Server created on 10.7.146.206:36013
+2023-08-25 11:05:46,719 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+2023-08-25 11:05:46,732 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(1, 10.7.146.206, 36013, None)
+2023-08-25 11:05:46,741 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(1, 10.7.146.206, 36013, None)
+2023-08-25 11:05:46,742 INFO BlockManager: Initialized BlockManager: BlockManagerId(1, 10.7.146.206, 36013, None)
+2023-08-25 11:05:46,748 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+2023-08-25 11:05:46,761 INFO Executor: Fetching spark://jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc:7078/jars/kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar with timestamp 1692932708201
+2023-08-25 11:05:46,782 INFO TransportClientFactory: Successfully created connection to jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc/10.7.146.205:7078 after 1 ms (0 ms spent in bootstraps)
+2023-08-25 11:05:46,784 INFO Utils: Fetching spark://jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc:7078/jars/kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar to /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/spark-363a4f3e-3a69-4e73-bdbd-05246cbfe996/fetchFileTemp5608182046731723468.tmp
+2023-08-25 11:05:46,803 INFO Utils: Copying /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/spark-363a4f3e-3a69-4e73-bdbd-05246cbfe996/5205518541692932708201_cache to /opt/spark/work-dir/./kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar
+2023-08-25 11:05:46,829 INFO Executor: Adding file:/opt/spark/work-dir/./kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar to class loader
+2023-08-25 11:05:46,829 INFO Executor: Fetching oss://lindorm-kyuubi/kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar with timestamp 1692932708201
+2023-08-25 11:05:47,514 INFO Utils: Fetching oss://lindorm-kyuubi/kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar to /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/spark-363a4f3e-3a69-4e73-bdbd-05246cbfe996/fetchFileTemp6717780203155427299.tmp
+2023-08-25 11:05:47,669 INFO Utils: /var/data/spark-fdfc9643-0273-4fbe-a33e-70e080f5a183/spark-363a4f3e-3a69-4e73-bdbd-05246cbfe996/12500179361692932708201_cache has been previously copied to /opt/spark/work-dir/./kyuubi-spark-sql-engine_2.12-1.4.1-2.1.0.jar
+2023-08-25 11:05:47,744 INFO KubernetesCoarseGrainedExecutorBackend: Got assigned task 0
+2023-08-25 11:05:47,753 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+2023-08-25 11:05:47,856 INFO TorrentBroadcast: Started reading broadcast variable 0 with 1 pieces (estimated total size 4.0 MiB)
+2023-08-25 11:05:47,903 INFO TransportClientFactory: Successfully created connection to jdbc-connection-root-d8631a8a2aa66b85-driver-svc.default.svc/10.7.146.205:7079 after 1 ms (0 ms spent in bootstraps)
+2023-08-25 11:05:47,952 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 3.8 KiB, free 137.6 GiB)
+2023-08-25 11:05:47,959 INFO TorrentBroadcast: Reading broadcast variable 0 took 103 ms
+2023-08-25 11:05:48,016 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 7.3 KiB, free 137.6 GiB)
+2023-08-25 11:05:48,796 INFO CodeGenerator: Code generated in 235.890908 ms
+2023-08-25 11:05:48,846 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1559 bytes result sent to driver
+2023-08-25 11:06:16,848 INFO KubernetesCoarseGrainedExecutorBackend: Got assigned task 1
+2023-08-25 11:06:16,849 INFO Executor: Running task 0.0 in stage 1.0 (TID 1)
+2023-08-25 11:06:16,857 INFO TorrentBroadcast: Started reading broadcast variable 2 with 1 pieces (estimated total size 4.0 MiB)
+2023-08-25 11:06:16,861 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 6.0 KiB, free 137.6 GiB)
+2023-08-25 11:06:16,864 INFO TorrentBroadcast: Reading broadcast variable 2 took 6 ms
+2023-08-25 11:06:16,865 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 13.9 KiB, free 137.6 GiB)
+2023-08-25 11:06:16,974 INFO CodeGenerator: Code generated in 23.101431 ms
+2023-08-25 11:06:16,976 INFO FileScanRDD: Reading File path: hdfs://ld-bp132m0984k66b0e1/ldspark/warehouse/test_ck5/part-00000-9f3ad512-4526-4f21-a895-645d84ef8a90_00044.c000.snappy.parquet, range: 0-931, partition values: [empty row]
+2023-08-25 11:06:16,978 INFO TorrentBroadcast: Started reading broadcast variable 1 with 1 pieces (estimated total size 4.0 MiB)
+2023-08-25 11:06:16,983 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 67.7 KiB, free 137.6 GiB)
+2023-08-25 11:06:16,985 INFO TorrentBroadcast: Reading broadcast variable 1 took 7 ms
+2023-08-25 11:06:17,022 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 923.5 KiB, free 137.6 GiB)
+2023-08-25 11:06:17,537 INFO CodecPool: Got brand-new decompressor [.snappy]
+2023-08-25 11:06:17,753 INFO Executor: Finished task 0.0 in stage 1.0 (TID 1). 1740 bytes result sent to driver

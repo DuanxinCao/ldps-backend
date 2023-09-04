@@ -1,12 +1,8 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend.jni;
+
+
 
 public class ExpressionEvaluatorJniWrapper {
-
-    /**
-     * Wrapper for native API.
-     */
-    public ExpressionEvaluatorJniWrapper() {
-    }
 
     /**
      * Call initNative to initialize native computing.
@@ -35,7 +31,7 @@ public class ExpressionEvaluatorJniWrapper {
     public native long nativeCreateKernelWithIterator(
             long allocatorId,
             byte[] wsPlan,
-            GeneralInIterator[] batchItr) throws RuntimeException;
+            Object[] batchItr) throws RuntimeException;
 
     /**
      * Create a native compute kernel and return a row iterator.

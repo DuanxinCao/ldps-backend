@@ -1,9 +1,9 @@
-package com.ldps.examples;
+package io.glutenproject.ldps.backend;
 
 import org.apache.spark.sql.catalyst.expressions.Attribute;
 import org.apache.spark.sql.vectorized.ColumnVector;
 import org.apache.spark.sql.vectorized.ColumnarBatch;
-import com.ldps.scalautils.CHExecUtil;
+import io.glutenproject.ldps.utils.CHExecUtil;
 
 import java.io.IOException;
 import java.util.List;
