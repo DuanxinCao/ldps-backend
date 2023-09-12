@@ -24,9 +24,14 @@ case class AstTransmitOverrides(session: SparkSession) extends Strategy with
   def checkTableSchema(identifier: TableIdentifier): (Boolean,CatalogTable) = {
     val catalogTable: CatalogTable = session.sessionState.catalog.getTableCatalog(identifier)
 
+    logError(s"test for Clickhouse : ${session.sparkContext.getConf.get("spark.sql.catalogImplementation").toString}")
+    logError(s"test for Clickhouse : ${session.sessionState.catalogManager.currentCatalog.name()}")
     // check datasource
-    if (session.sparkContext.getConf.get("spark.sql.catalogImplementation").equals("hive") &&
-      session.sessionState.catalogManager.currentCatalog.isInstanceOf[V2SessionCatalog]) {
+    //    if (session.sparkContext.conf.get(CATALOG_IMPLEMENTATION).equals("hive") &&
+    //      session.sessionState.catalogManager.currentCatalog.isInstanceOf[V2SessionCatalog]) {
+    if (session.sparkContext.getConf.get("spark.sql.catalogImplementation").equals("hive")) {
+      // check data source provider
+      logError(s"test for Clickhouse : ${catalogTable.properties.get(DATASOURCE_PROVIDER).get.toString}")
       // check data source provider
       if (catalogTable.properties.get(DATASOURCE_PROVIDER) match {
         case None =>
@@ -45,6 +50,7 @@ case class AstTransmitOverrides(session: SparkSession) extends Strategy with
             true
           } catch {
             case _:Throwable =>
+              logError(s"test for Clickhouse :  check schema error")
               false
           }
         }) {
@@ -233,7 +239,8 @@ case class AstTransmitOverrides(session: SparkSession) extends Strategy with
         if (checkResult._1) {
           sqlPlan.setCatalogTable(checkResult._2)
         } else {
-          logError(s"Transformation for ${plan.getClass} is currently not supported by ClickHouse.")
+          logError(s"checkTableSchema failed." +
+            s"Transformation for ${plan.getClass} is currently not supported by ClickHouse.")
           sqlPlan.setCanConvert(false)
         }
         Nil
@@ -421,7 +428,7 @@ case class AstTransmitOverrides(session: SparkSession) extends Strategy with
         sqlPlan.setCanConvert(false)
         Nil
       case p =>
-        logError(s"Transformation for ${p.getClass} is currently not supported by ClickHouse.")
+        logError(s"Unknown : Transformation for ${p.getClass} is currently not supported by ClickHouse.")
         sqlPlan.setCanConvert(false)
         Nil
 
