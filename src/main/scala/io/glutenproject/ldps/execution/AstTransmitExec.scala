@@ -96,7 +96,7 @@ case class AstTransmitExec(
   }
 
   override protected def doExecuteColumnar(): RDD[ColumnarBatch] = {
-    System.loadLibrary("ldpsbackend")
+//    System.loadLibrary("ldpsbackend")
 
     val startTime = System.currentTimeMillis();
     val lastDDLTime: String = catalogTable.properties.getOrElse(HIVE_GENERATED_TABLE_PROPERTIES.mkString, "0")
